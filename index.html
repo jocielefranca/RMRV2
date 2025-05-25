@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apresentação NPS - Diagonal & Victa</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+            color: white;
+            overflow-x: hidden;
+        }
+        
+        .slide {
+            min-height: 100vh;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            border-bottom: 1px solid #333;
+        }
+        
+        .slide h1 {
+            font-size: 3.5em;
+            font-weight: 700;
+            margin-bottom: 30px;
+            background: linear-gradient(45deg, #ffffff, #cccccc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        .slide h2 {
+            font-size: 2.5em;
+            font-weight: 600;
+            margin-bottom: 40px;
+            text-align: center;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+        
+        .slide h3 {
+            font-size: 2em;
+            font-weight: 500;
+            margin-bottom: 30px;
+            color: #fff;
+        }
+        
+        .brand-diagonal {
+            color: #000000;
+            background: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            display: inline-block;
+        }
+        
+        .brand-victa {
+            color: #00ff88;
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .metric-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: slideInUp 0.8s ease-out;
+        }
+        
+        .metric-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .metric-value {
+            font-size: 3.5em;
+            font-weight: 700;
+            margin: 20px 0;
+        }
+        
+        .metric-positive {
+            color: #00ff88;
+        }
+        
+        .metric-warning {
+            color: #ff9f00;
+        }
+        
+        .metric-critical {
+            color: #ff4757;
+        }
+        
+        .metric-label {
+            font-size: 1.2em;
+            color: #cccccc;
+            margin-bottom: 10px;
+        }
+        
+        .metric-trend {
+            font-size: 1em;
+            margin-top: 15px;
+            padding: 8px 16px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+        
+        .trend-up {
+            background: rgba(0, 255, 136, 0.2);
+            color: #00ff88;
+        }
+        
+        .trend-down {
+            background: rgba(255, 71, 87, 0.2);
+            color: #ff4757;
+        }
+        
+        .trend-stable {
+            background: rgba(255, 159, 0, 0.2);
+            color: #ff9f00;
+        }
+        
+        .chart-container {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 30px 0;
+            height: 400px;
+            position: relative;
+        }
+        
+        .action-plan {
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.1) 0%, rgba(0, 0, 0, 0.3) 100%);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+        }
+        
+        .action-item {
+            display: flex;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .action-item:last-child {
+            border-bottom: none;
+        }
+        
+        .status-badge {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 600;
+            margin-right: 20px;
+            min-width: 80px;
+            text-align: center;
+        }
+        
+        .status-done {
+            background: rgba(0, 255, 136, 0.2);
+            color: #00ff88;
+        }
+        
+        .status-progress {
+            background: rgba(255, 159, 0, 0.2);
+            color: #ff9f00;
+        }
+        
+        .status-todo {
+            background: rgba(255, 71, 87, 0.2);
+            color: #ff4757;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(255, 71, 87, 0.2) 0%, rgba(255, 0, 0, 0.1) 100%);
+            border: 2px solid #ff4757;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        .navigation {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            gap: 15px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin: 40px 0;
+        }
+        
+        .brand-section {
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+        }
+        
+        .diagonal-section {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(240, 240, 240, 0.9) 100%);
+            color: #000000;
+        }
+        
+        .victa-section {
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.2) 0%, rgba(0, 200, 100, 0.1) 100%);
+            border: 2px solid rgba(0, 255, 136, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <!-- Slide 1: Título -->
+    <div class="slide" id="slide1">
+        <h1>Resultados NPS</h1>
+        <h2>Janeiro - Abril 2025</h2>
+        <div style="text-align: center; margin-top: 50px;">
+            <div style="display: inline-block; margin: 0 30px;">
+                <span class="brand-diagonal" style="font-size: 2em; font-weight: bold;">DIAGONAL</span>
+            </div>
+            <div style="display: inline-block; margin: 0 30px;">
+                <span class="brand-victa" style="font-size: 2em; font-weight: bold;">VICTA</span>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 50px; font-size: 1.3em; color: #cccccc;">
+            Análise Executiva | Diretoria de Marketing e Experiência do Cliente
+        </div>
+    </div>
+
+    <!-- Slide 2: Visão Geral dos Resultados -->
+    <div class="slide hidden" id="slide2">
+        <h2>Visão Geral - Últimos 4 Meses</h2>
+        
+        <div class="comparison-grid">
+            <div class="brand-section diagonal-section">
+                <h3 style="color: #000;">DIAGONAL</h3>
+                <div class="metric-value" style="color: #000;">85</div>
+                <div style="color: #666; font-size: 1.2em;">NPS Médio (Jan-Abr)</div>
+                <div class="metric-trend trend-up" style="margin-top: 20px;">
+                    ↗ +11 pts vs Meta (80)
+                </div>
+            </div>
+            
+            <div class="brand-section victa-section">
+                <h3 class="brand-victa">VICTA</h3>
+                <div class="metric-value metric-positive">72</div>
+                <div style="color: #cccccc; font-size: 1.2em;">NPS Médio (Jan-Abr)</div>
+                <div class="metric-trend trend-up">
+                    ↗ +2 pts vs Meta (70)
+                </div>
+            </div>
+        </div>
+        
+        <div class="chart-container">
+            <canvas id="evolutionChart"></canvas>
+        </div>
+    </div>
+
+    <!-- Slide 3: Alerta Crítico -->
+    <div class="slide hidden" id="slide3">
+        <h2>🚨 ALERTA CRÍTICO</h2>
+        
+        <div class="highlight-box pulse">
+            <h3 style="color: #ff4757; font-size: 2.5em; margin-bottom: 20px;">NPS Pós-Ocupação VICTA</h3>
+            <div class="metric-value metric-critical" style="font-size: 4em;">-49</div>
+            <div style="font-size: 1.5em; margin: 20px 0;">Média dos últimos 4 meses</div>
+            <div style="font-size: 1.2em; color: #ff9f00;">Meta: 10 | Gap: -59 pontos</div>
+        </div>
+        
+        <div style="background: rgba(255, 71, 87, 0.1); padding: 30px; border-radius: 15px; margin-top: 30px;">
+            <h3 style="color: #ff4757;">Evolução Mensal:</h3>
+            <div style="display: flex; justify-content: space-around; margin-top: 20px; font-size: 1.3em;">
+                <div>Jan: <span class="metric-critical">-53</span></div>
+                <div>Fev: <span class="metric-critical">-54</span></div>
+                <div>Mar: <span class="metric-critical">-50</span></div>
+                <div>Abr: <span style="color: #ff9f00;">-42</span> ↗</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4: Performance por Jornada -->
+    <div class="slide hidden" id="slide4">
+        <h2>Performance por Etapa da Jornada - VICTA</h2>
+        
+        <div class="chart-container">
+            <canvas id="journeyChart"></canvas>
+        </div>
+        
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 30px;">
+            <div class="metric-card">
+                <div class="metric-label">Pós Assinatura</div>
+                <div class="metric-value metric-warning">72</div>
+                <div class="metric-trend trend-down">↘ -15 pts vs 2024</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Pós Vistoria</div>
+                <div class="metric-value metric-positive">89</div>
+                <div class="metric-trend trend-up">↗ +8 pts vs 2024</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">ASTEC</div>
+                <div class="metric-value metric-positive">40</div>
+                <div class="metric-trend trend-up">↗ +7 pts vs 2024</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: Plano de Ação -->
+    <div class="slide hidden" id="slide5">
+        <h2>Plano de Ação em Execução</h2>
+        
+        <div class="action-plan">
+            <h3 style="margin-bottom: 30px;">Status das Iniciativas</h3>
+            
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-bottom: 40px;">
+                <div style="text-align: center;">
+                    <div style="font-size: 3em; color: #00ff88;">8</div>
+                    <div class="status-badge status-done">CONCLUÍDAS</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 3em; color: #ff9f00;">4</div>
+                    <div class="status-badge status-progress">EM ANDAMENTO</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 3em; color: #ff4757;">2</div>
+                    <div class="status-badge status-todo">A INICIAR</div>
+                </div>
+            </div>
+            
+            <div class="action-item">
+                <div class="status-badge status-progress">FAZENDO</div>
+                <div>
+                    <strong>Entrevistas com Clientes Detratores</strong><br>
+                    <span style="color: #cccccc;">Análise qualitativa das principais dores - Prazo: 30/05</span>
+                </div>
+            </div>
+            
+            <div class="action-item">
+                <div class="status-badge status-progress">FAZENDO</div>
+                <div>
+                    <strong>Análise Comparativa de Processos</strong><br>
+                    <span style="color: #cccccc;">Comparação Fev-Abr/2025 vs períodos de alta performance 2024</span>
+                </div>
+            </div>
+            
+            <div class="action-item">
+                <div class="status-badge status-done">FEITO</div>
+                <div>
+                    <strong>Sistema de Alertas Preventivos</strong><br>
+                    <span style="color: #cccccc;">Notificação automática para notas detratoras</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6: Análise Estratégica -->
+    <div class="slide hidden" id="slide6">
+        <h2>Análise Estratégica</h2>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 30px;">
+            <!-- Análise NPS Pós Assinatura -->
+            <div style="background: linear-gradient(135deg, rgba(138, 43, 226, 0.15) 0%, rgba(138, 43, 226, 0.05) 100%); border: 2px solid rgba(138, 43, 226, 0.4); border-radius: 20px; padding: 30px; border-left: 6px solid #8a2be2;">
+                <div style="display: flex; align-items: center; margin-bottom: 25px;">
+                    <div style="background: #8a2be2; color: white; padding: 6px 16px; border-radius: 20px; font-size: 0.9em; font-weight: 600; margin-right: 15px;">Análise</div>
+                    <h3 style="color: #8a2be2; margin: 0;">NPS Pós Assinatura - Reflexões Críticas</h3>
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <div style="display: flex; align-items: flex-start; margin-bottom: 15px;">
+                        <span style="color: #8a2be2; font-size: 1.2em; margin-right: 10px;">🎯</span>
+                        <div>
+                            <strong style="color: #8a2be2;">Padrão Preocupante Identificado:</strong> O vale de fevereiro a abril (69→63→68) revela uma fragilidade crítica no processo pós-assinatura que não pode ser "mascarada" pelo pico de maio (90).
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <div style="display: flex; align-items: flex-start; margin-bottom: 15px;">
+                        <span style="color: #ff9f00; font-size: 1.2em; margin-right: 10px;">📊</span>
+                        <div>
+                            <strong style="color: #ff9f00;">Volatilidade Extrema:</strong> A amplitude de 37 pontos (63 a 100) indica falta de padronização nos processos, sugerindo que a experiência do cliente depende mais de fatores circunstanciais do que de processos estruturados.
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin-bottom: 25px;">
+                    <div style="color: #00bcd4; font-weight: 600; margin-bottom: 10px;">🔍 Hipóteses em Investigação:</div>
+                    <ul style="margin-left: 20px; line-height: 1.6; color: #cccccc;">
+                        <li>Mudanças na equipe ou treinamento no período crítico</li>
+                        <li>Alterações no sistema de assinatura digital</li>
+                        <li>Sobrecarga operacional em meses específicos</li>
+                        <li>Fatores sazonais ou externos não mapeados</li>
+                    </ul>
+                </div>
+                
+                <div style="background: rgba(255, 193, 7, 0.1); padding: 15px; border-radius: 10px; border-left: 4px solid #ffc107;">
+                    <div style="display: flex; align-items: flex-start;">
+                        <span style="color: #ffc107; font-size: 1.1em; margin-right: 8px;">⚡</span>
+                        <div>
+                            <strong style="color: #ffc107;">Recomendação Urgente:</strong> Implementando controles de qualidade mais rigorosos e monitoramento semanal para evitar que o vale se repita, pois um NPS consistentemente alto (80+) é mais valioso que picos isolados.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Análise ASTEC -->
+            <div style="background: linear-gradient(135deg, rgba(255, 152, 0, 0.15) 0%, rgba(255, 152, 0, 0.05) 100%); border: 2px solid rgba(255, 152, 0, 0.4); border-radius: 20px; padding: 30px; border-left: 6px solid #ff9800;">
+                <div style="display: flex; align-items: center; margin-bottom: 25px;">
+                    <div style="background: #ff9800; color: white; padding: 6px 16px; border-radius: 20px; font-size: 0.9em; font-weight: 600; margin-right: 15px;">Análise</div>
+                    <h3 style="color: #ff9800; margin: 0;">ASTEC - Reflexões Estratégicas</h3>
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <div style="display: flex; align-items: flex-start; margin-bottom: 15px;">
+                        <span style="color: #4caf50; font-size: 1.2em; margin-right: 10px;">📈</span>
+                        <div>
+                            <strong style="color: #4caf50;">Melhoria Consolidada:</strong> O salto de 33 (2024) para 47 (2025) representa um progresso de 42%, demonstrando que as ações implementadas estão surtindo efeito estrutural.
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <div style="display: flex; align-items: flex-start; margin-bottom: 15px;">
+                        <span style="color: #f44336; font-size: 1.2em; margin-right: 10px;">📉</span>
+                        <div>
+                            <strong style="color: #f44336;">Instabilidade Operacional:</strong> A sequência 27→84→29→22→67 revela um padrão de "montanha-russa" que indica problemas de consistência na entrega, apesar da melhoria geral.
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin-bottom: 25px;">
+                    <div style="color: #00bcd4; font-weight: 600; margin-bottom: 10px;">🔍 Análise do Padrão:</div>
+                    <ul style="margin-left: 20px; line-height: 1.6; color: #cccccc;">
+                        <li><strong>Fevereiro (84):</strong> Pico isolado que precisa ser replicado</li>
+                        <li><strong>Mar/Abr (29→22):</strong> Queda crítica consecutiva</li>
+                        <li><strong>Maio (67):</strong> Recuperação promissora</li>
+                    </ul>
+                </div>
+                
+                <div style="background: rgba(138, 43, 226, 0.1); padding: 15px; border-radius: 10px; border-left: 4px solid #8a2be2; margin-bottom: 20px;">
+                    <div style="display: flex; align-items: flex-start;">
+                        <span style="color: #8a2be2; font-size: 1.1em; margin-right: 8px;">🎯</span>
+                        <div>
+                            <strong style="color: #8a2be2;">Oportunidade Estratégica:</strong> ASTEC tem potencial comprovado (84 em fev), mas precisa de estabilização urgente. O foco deve ser identificar o que funcionou em fevereiro e maio para replicar consistentemente.
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="background: rgba(255, 193, 7, 0.1); padding: 15px; border-radius: 10px; border-left: 4px solid #ffc107;">
+                    <div style="display: flex; align-items: flex-start;">
+                        <span style="color: #ffc107; font-size: 1.1em; margin-right: 8px;">⚡</span>
+                        <div>
+                            <strong style="color: #ffc107;">Próximos Passos:</strong> Implementar análise de causa raiz dos meses críticos e criar protocolo de replicação dos sucessos, priorizando a consistência sobre picos isolados.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 7: Próximos Passos -->
+    <div class="slide hidden" id="slide7">
+        <h2>Próximos Passos Críticos</h2>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 50px;">
+            <div class="metric-card" style="background: rgba(255, 71, 87, 0.1); border: 2px solid #ff4757;">
+                <h3 style="color: #ff4757; margin-bottom: 20px;">🎯 PRIORIDADE MÁXIMA</h3>
+                <div style="text-align: left; font-size: 1.1em; line-height: 1.8;">
+                    <div>• Finalizar entrevistas com detratores</div>
+                    <div>• Implementar guardiões do NPS</div>
+                    <div>• Acelerar comunicação proativa</div>
+                    <div>• Reuniões semanais de acompanhamento</div>
+                </div>
+            </div>
+            
+            <div class="metric-card" style="background: rgba(0, 255, 136, 0.1); border: 2px solid #00ff88;">
+                <h3 style="color: #00ff88; margin-bottom: 20px;">📈 METAS REVISADAS</h3>
+                <div style="text-align: left; font-size: 1.1em; line-height: 1.8;">
+                    <div>• NPS Pós-Ocupação: <strong>-30</strong> (Jun/25)</div>
+                    <div>• NPS Pós-Ocupação: <strong>-15</strong> (Set/25)</div>
+                    <div>• NPS Pós-Ocupação: <strong>0</strong> (Dez/25)</div>
+                    <div>• NPS Geral Victa: <strong>75</strong> (Dez/25)</div>
+                </div>
+            </div>
+        </div>
+        
+        <div style="background: linear-gradient(135deg, rgba(255, 159, 0, 0.2) 0%, rgba(255, 100, 0, 0.1) 100%); padding: 30px; border-radius: 15px; margin-top: 40px; text-align: center;">
+            <h3 style="color: #ff9f00; margin-bottom: 15px;">⏰ CRONOGRAMA EXECUTIVO</h3>
+            <div style="font-size: 1.2em;">
+                <strong>Próxima reunião de acompanhamento: 30/05/2025</strong><br>
+                <span style="color: #cccccc;">Apresentação de resultados das ações em andamento</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navegação -->
+    <div class="navigation">
+        <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">← Anterior</button>
+        <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Próximo →</button>
+        <span class="nav-btn" id="slideCounter">1 / 7</span>
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 7;
+        
+        // Configuração dos gráficos
+        Chart.defaults.color = '#ffffff';
+        Chart.defaults.borderColor = 'rgba(255, 255, 255, 0.1)';
+        
+        function changeSlide(direction) {
+            const current = document.getElementById(`slide${currentSlide}`);
+            current.classList.add('hidden');
+            
+            currentSlide += direction;
+            
+            if (currentSlide > totalSlides) currentSlide = 1;
+            if (currentSlide < 1) currentSlide = totalSlides;
+            
+            const next = document.getElementById(`slide${currentSlide}`);
+            next.classList.remove('hidden');
+            
+            document.getElementById('slideCounter').textContent = `${currentSlide} / ${totalSlides}`;
+            
+            // Criar gráficos quando necessário
+            if (currentSlide === 2) createEvolutionChart();
+            if (currentSlide === 4) createJourneyChart();
+        }
+        
+        function createEvolutionChart() {
+            const ctx = document.getElementById('evolutionChart');
+            if (ctx.chart) ctx.chart.destroy();
+            
+            ctx.chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan/25', 'Fev/25', 'Mar/25', 'Abr/25'],
+                    datasets: [
+                        {
+                            label: 'Diagonal',
+                            data: [78, 80, 88, 89],
+                            borderColor: '#ffffff',
+                            backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                            borderWidth: 4,
+                            tension: 0.4,
+                            pointBackgroundColor: '#ffffff',
+                            pointBorderColor: '#000000',
+                            pointBorderWidth: 2,
+                            pointRadius: 8
+                        },
+                        {
+                            label: 'Victa',
+                            data: [71, 74, 73, 71],
+                            borderColor: '#00ff88',
+                            backgroundColor: 'rgba(0, 255, 136, 0.1)',
+                            borderWidth: 4,
+                            tension: 0.4,
+                            pointBackgroundColor: '#00ff88',
+                            pointBorderColor: '#ffffff',
+                            pointBorderWidth: 2,
+                            pointRadius: 8
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                usePointStyle: true,
+                                font: { size: 16 },
+                                padding: 20
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            min: 60,
+                            max: 100,
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                font: { size: 14 }
+                            }
+                        },
+                        x: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                font: { size: 14 }
+                            }
+                        }
+                    },
+                    elements: {
+                        point: {
+                            hoverRadius: 12
+                        }
+                    }
+                }
+            });
+        }
+        
+        function createJourneyChart() {
+            const ctx = document.getElementById('journeyChart');
+            if (ctx.chart) ctx.chart.destroy();
+            
+            ctx.chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Pós Venda', 'Pós Assinatura', 'Pós Visita', 'Pós Vistoria', 'Pós Chaves', 'Pós Moradia', 'ASTEC', 'Geral'],
+                    datasets: [
+                        {
+                            label: '2024',
+                            data: [89, 88, 79, 81, 81, -53, 33, 72],
+                            backgroundColor: 'rgba(255, 255, 255, 0.3)',
+                            borderColor: '#ffffff',
+                            borderWidth: 2
+                        },
+                        {
+                            label: '2025',
+                            data: [87, 76, 84, 89, null, -39, 47, 64],
+                            backgroundColor: 'rgba(0, 255, 136, 0.3)',
+                            borderColor: '#00ff88',
+                            borderWidth: 2
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                font: { size: 16 },
+                                padding: 20
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            min: -60,
+                            max: 100,
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                font: { size: 12 }
+                            }
+                        },
+                        x: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                font: { size: 11 },
+                                maxRotation: 45
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        // Navegação por teclado
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                changeSlide(1);
+            } else if (e.key === 'ArrowLeft') {
+                changeSlide(-1);
+            }
+        });
+        
+        // Inicializar
+        document.getElementById('slideCounter').textContent = `${currentSlide} / ${totalSlides}`;
+    </script>
+</body>
+</html>
