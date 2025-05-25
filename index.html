@@ -212,6 +212,134 @@
             color: #4dd0e1;
             font-weight: bold;
         }
+
+        .action-plan-container {
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .status-summary {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 20px;
+        }
+
+        .status-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            min-width: 120px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .status-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .status-card.done {
+            border-color: #4caf50;
+        }
+
+        .status-card.doing {
+            border-color: #ff9800;
+        }
+
+        .status-card.todo {
+            border-color: #f44336;
+        }
+
+        .status-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .status-card.done .status-number {
+            color: #4caf50;
+        }
+
+        .status-card.doing .status-number {
+            color: #ff9800;
+        }
+
+        .status-card.todo .status-number {
+            color: #f44336;
+        }
+
+        .status-label {
+            font-size: 1rem;
+            color: #4dd0e1;
+            font-weight: bold;
+        }
+
+        .action-table-container {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .action-table {
+            width: 100%;
+            border-collapse: collapse;
+            color: white;
+        }
+
+        .action-table th {
+            background: rgba(77, 208, 225, 0.3);
+            padding: 15px 10px;
+            text-align: left;
+            font-weight: bold;
+            border-bottom: 2px solid #4dd0e1;
+            position: sticky;
+            top: 0;
+        }
+
+        .action-table td {
+            padding: 12px 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+        }
+
+        .action-table td:first-child {
+            max-width: 300px;
+            word-wrap: break-word;
+        }
+
+        .status-badge {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .status-badge.done {
+            background: #4caf50;
+            color: white;
+        }
+
+        .status-badge.doing {
+            background: #ff9800;
+            color: white;
+        }
+
+        .status-badge.todo {
+            background: #f44336;
+            color: white;
+        }
+
+        .action-table tr:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
     </style>
 </head>
 <body>
@@ -305,14 +433,101 @@
             </div>
         </div>
 
-        <!-- Slide 5: Próximos Passos -->
+        <!-- Slide 5: Plano de Ação -->
         <div class="slide">
             <div class="slide-header">
-                <h2 class="slide-title">Próximos Passos</h2>
-                <p class="slide-subtitle">Plano de Ação e Análise Estratégica</p>
+                <h2 class="slide-title">Plano de Ação</h2>
+                <p class="slide-subtitle">Estratégias para Melhoria do NPS</p>
             </div>
-            <div class="vision-text">
-                <p>Em breve: Análise detalhada e estratégias para melhoria contínua</p>
+            <div class="action-plan-container">
+                <div class="status-summary">
+                    <div class="status-card done">
+                        <div class="status-number">9</div>
+                        <div class="status-label">Feito</div>
+                    </div>
+                    <div class="status-card doing">
+                        <div class="status-number">4</div>
+                        <div class="status-label">Fazendo</div>
+                    </div>
+                    <div class="status-card todo">
+                        <div class="status-number">2</div>
+                        <div class="status-label">A Fazer</div>
+                    </div>
+                </div>
+                <div class="action-table-container">
+                    <table class="action-table">
+                        <thead>
+                            <tr>
+                                <th>Ação</th>
+                                <th>Responsável</th>
+                                <th>Prazo</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="status-done">
+                                <td>[Modelo de Pesquisa] Realizar teste de um novo modelo de pesquisa de percepção</td>
+                                <td>Jô</td>
+                                <td>10/04/25</td>
+                                <td><span class="status-badge done">Feito</span></td>
+                            </tr>
+                            <tr class="status-done">
+                                <td>[Reforço de comunicação] Fomentar a pesquisa de pós venda através de reforço junto ao Comercial</td>
+                                <td>Natália</td>
+                                <td>15/04/25</td>
+                                <td><span class="status-badge done">Feito</span></td>
+                            </tr>
+                            <tr class="status-done">
+                                <td>[Engajamento interno] Reunir com líderes para definir os nomes dos guardiões</td>
+                                <td>Jô</td>
+                                <td>05/04/25</td>
+                                <td><span class="status-badge done">Feito</span></td>
+                            </tr>
+                            <tr class="status-done">
+                                <td>[Estatísticas] Análise de tendências do indicador nas fases mais críticas</td>
+                                <td>Jô</td>
+                                <td>15/05/25</td>
+                                <td><span class="status-badge done">Feito</span></td>
+                            </tr>
+                            <tr class="status-done">
+                                <td>[Estatísticas] Revisão de metas mensais para plano de recuperação</td>
+                                <td>Jô</td>
+                                <td>05/04/25</td>
+                                <td><span class="status-badge done">Feito</span></td>
+                            </tr>
+                            <tr class="status-doing">
+                                <td>[Entrevistas] Entrevistas direcionadas com clientes de notas baixas</td>
+                                <td>Natália</td>
+                                <td>30/05/25</td>
+                                <td><span class="status-badge doing">Fazendo</span></td>
+                            </tr>
+                            <tr class="status-doing">
+                                <td>[Análises] Comparar processos de assinatura Fev-Abr/2025 vs 2024</td>
+                                <td>Jô</td>
+                                <td>30/05/25</td>
+                                <td><span class="status-badge doing">Fazendo</span></td>
+                            </tr>
+                            <tr class="status-doing">
+                                <td>[Análises] Identificar mudanças recentes em sistemas e procedimentos</td>
+                                <td>Jô</td>
+                                <td>30/05/25</td>
+                                <td><span class="status-badge doing">Fazendo</span></td>
+                            </tr>
+                            <tr class="status-todo">
+                                <td>[Comunicação proativa] Régua com pílulas de conhecimento</td>
+                                <td>Jô</td>
+                                <td>15/05/25</td>
+                                <td><span class="status-badge todo">A fazer</span></td>
+                            </tr>
+                            <tr class="status-todo">
+                                <td>[Guardiões] Iniciar os ritos com o time selecionado</td>
+                                <td>Jô</td>
+                                <td>28/05/25</td>
+                                <td><span class="status-badge todo">A fazer</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
