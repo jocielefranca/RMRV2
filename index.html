@@ -398,6 +398,34 @@
     color: #4dd0e1;
     margin-top: 8px;
     opacity: 0.9;
+} /* Correções do Layout */
+.comparison-table-container {
+    max-width: 800px;
+    margin: 20px auto;
+    overflow-x: auto;
+}
+
+.chart-container[style*="grid-column: span 2"] {
+    margin: 20px 0;
+}
+
+/* Ajustes de Responsividade */
+@media (max-width: 768px) {
+    .comparison-table th,
+    .comparison-table td {
+        padding: 12px;
+        font-size: 0.9rem;
+    }
+    
+    .comparison-table th {
+        font-size: 0.8rem;
+    }
+}
+
+/* Ajustes do Gráfico */
+#occupationChart {
+    width: 100%!important;
+    height: 400px!important;
 }
     </style>
 </head>
@@ -494,24 +522,47 @@
 <div class="slide">
     <div class="slide-header">
         <h2 class="slide-title">Impacto da Pós-Ocupação</h2>
-        <p class="slide-subtitle">Comparativo de Desempenho NPS</p>
+        <p class="slide-subtitle">Análise Comparativa do NPS</p>
     </div>
-    <div class="content-grid">
-        <!-- Gráfico Comparativo -->
-        <div class="chart-container" style="grid-column: span 2;">
+    
+    <div class="content-grid" style="max-width: 1000px; width: 90%;">
+        <!-- Gráfico Principal -->
+        <div class="chart-container" style="grid-column: span 2; height: 400px;">
             <canvas id="occupationChart"></canvas>
         </div>
         
-        <!-- Cards com Dados Chave -->
-        <div class="metric-card">
-            <div class="metric-value positive">+12</div>
-            <div class="metric-label">Melhoria no Período</div>
-            <div class="metric-subtext">Jan-Mai 2024/2025</div>
-        </div>
-        <div class="metric-card">
-            <div class="metric-value">11</div>
-            <div class="metric-label">Delta Médio Anual</div>
-            <div class="metric-subtext">2024 → 2025</div>
+        <!-- Tabela Comparativa -->
+        <div class="comparison-table-container" style="grid-column: span 2;">
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Ano</th>
+                        <th>Sem Pós-Ocupação</th>
+                        <th>Com Pós-Ocupação</th>
+                        <th>Delta</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2024</td>
+                        <td>80</td>
+                        <td>73</td>
+                        <td class="delta-cell delta-positive">+7</td>
+                    </tr>
+                    <tr>
+                        <td>2025</td>
+                        <td>76</td>
+                        <td>65</td>
+                        <td class="delta-cell delta-positive">+11</td>
+                    </tr>
+                    <tr class="highlight-row">
+                        <td>Jan-Mai 2024/2025</td>
+                        <td>85</td>
+                        <td>73</td>
+                        <td class="delta-cell delta-positive">+12</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
@@ -887,6 +938,88 @@
                 }
             });
         }
+function initOccupationChart() {
+    const ctx = document.getElementById('occupationChart');
+    if (!ctx) return;
+    
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['2024', '2025', 'Jan-Mai 2024/2025'],
+            datasets: [{
+                label: 'Sem Pós-Ocupação',
+                data: [80, 76, 85],
+                backgroundColor: 'rgba(77, 208, 225, 0.8)',
+                borderColor: '#4dd0e1',
+                borderWidth: 2
+            }, {
+                label: 'Com Pós-Ocupação',
+                data: [73, 65, 73],
+                backgroundColor: 'rgba(255, 152, 0, 0.8)',
+                borderColor: '#ff9800',
+                borderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'top',
+                    labels: {
+                        color: 'white',
+                        font: {
+                            size: 14
+                        }
+                    }
+                },
+                tooltip: {
+                    enabled: true,
+                    mode: 'index',
+                    intersect: false
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        color: 'white',
+                        stepSize: 10
+                    },
+                    grid: {
+                        color: 'rgba(255, 255, 255, 0.1)'
+                    }
+                },
+                x: {
+                    ticks: {
+                        color: 'white',
+                        font: {
+                            size: 12
+                        }
+                    },
+                    grid: {
+                        display: false
+                    }
+                }
+            }
+        }
+    });
+}
+
+// Atualize a função showSlide
+function showSlide(index) {
+    slides.forEach(slide => slide.classList.remove('active'));
+    slides[index].classList.add('active');
+    document.getElementById('currentSlide').textContent = index + 1;
+    
+    // Inicializa gráficos específicos
+    switch(index) {
+        case 1: setTimeout(initOverviewChart, 100); break;
+        case 2: setTimeout(initJourneyChart, 100); break;
+        case 3: setTimeout(initMonthlyChart, 100); break;
+        case 5: setTimeout(initOccupationChart, 100); break; // Novo gráfico no slide 6
+    }
+}
 
         // Initialize Monthly Chart
         function initMonthlyChart() {
