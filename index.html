@@ -1,3 +1,10 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NPS RMR - Apresentação Diretoria</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -333,20 +340,6 @@
         .action-table tr:hover {
             background: rgba(255, 255, 255, 0.05);
         }
-        .comparison-section {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 15px;
-    padding: 25px;
-    backdrop-filter: blur(10px);
-    border: 2px solid rgba(77, 208, 225, 0.3);
-}
-
-.comparison-title {
-    font-size: 1.5rem;
-    color: #4dd0e1;
-    margin-bottom: 20px;
-    text-align: center;
-}
     </style>
 </head>
 <body>
@@ -354,7 +347,6 @@
         <div class="slide-indicator">
             <span id="currentSlide">1</span> / <span id="totalSlides">5</span>
         </div>
-
 
         <!-- Slide 1: Resultados NPS -->
         <div class="slide active">
@@ -383,101 +375,7 @@
             <div class="chart-container">
                 <canvas id="overviewChart"></canvas>
             </div>
-   <!-- Slide 5: Resumo Comparativo -->
-    <div class="slide">
-      <div class="slide-header">
-        <h2 class="slide-title">Resumo Comparativo</h2>
-        <p class="slide-subtitle">Impacto da Pós Ocupação no NPS</p>
-      </div>
-      
-      <div class="summary-grid">
-        <div class="summary-card">
-          <div class="summary-header">
-            <h3>Comparativo Anual</h3>
-            <div class="summary-period">Dados completos</div>
-          </div>
-          <div class="summary-metrics">
-            <div class="metric-row">
-              <div class="metric-year">2024</div>
-              <div class="metric-comparison">
-                <div class="metric-bar">
-                  <div class="bar-without" style="width: 100%">
-                    <span class="bar-value">80</span>
-                  </div>
-                </div>
-                <div class="metric-bar">
-                  <div class="bar-with" style="width: 91.25%">
-                    <span class="bar-value">73</span>
-                  </div>
-                </div>
-                <div class="delta-badge delta-neutral">-7</div>
-              </div>
-            </div>
-            <div class="metric-row">
-              <div class="metric-year">2025</div>
-              <div class="metric-comparison">
-                <div class="metric-bar">
-                  <div class="bar-without" style="width: 95%">
-                    <span class="bar-value">76</span>
-                  </div>
-                </div>
-                <div class="metric-bar">
-                  <div class="bar-with" style="width: 81.25%">
-                    <span class="bar-value">65</span>
-                  </div>
-                </div>
-                <div class="delta-badge delta-negative">-11</div>
-              </div>
-            </div>
-          </div>
         </div>
-        
-        <div class="summary-card">
-          <div class="summary-header">
-            <h3>Mesmo Período</h3>
-            <div class="summary-period">Janeiro a Maio</div>
-          </div>
-          <div class="period-comparison">
-            <div class="period-metric">
-              <div class="period-label">2024</div>
-              <div class="period-value period-high">85</div>
-            </div>
-            <div class="period-arrow">→</div>
-            <div class="period-metric">
-              <div class="period-label">2025</div>
-              <div class="period-value period-medium">73</div>
-            </div>
-            <div class="period-delta">
-              <span class="delta-label">Variação</span>
-              <span class="delta-value-highlight">-12</span>
-            </div>
-          </div>
-        </div>
-        
-        <div class="summary-card">
-          <div class="summary-header">
-            <h3>Performance por Categoria</h3>
-            <div class="summary-period">Análise detalhada</div>
-          </div>
-          <div class="category-metrics">
-            <div class="category-item">
-              <span class="category-label">Sem Pós Ocupação</span>
-              <div class="category-trend">
-                <span class="trend-value positive">Estável</span>
-                <div class="trend-indicator positive"></div>
-              </div>
-            </div>
-            <div class="category-item">
-              <span class="category-label">Com Pós Ocupação</span>
-              <div class="category-trend">
-                <span class="trend-value negative">Em declínio</span>
-                <div class="trend-indicator negative"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
         <!-- Slide 3: Jornada do Cliente 2024 vs 2025 -->
         <div class="slide">
@@ -975,3 +873,4 @@
     </script>
 </body>
 </html>
+
