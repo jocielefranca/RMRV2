@@ -19,25 +19,24 @@
             overflow-x: hidden;
         }
 
-        .presentation-container {
-            width: 100vw;
-            height: 100vh;
-            position: relative;
-        }
+       .presentation-container {
+    width: 100vw;
+    min-height: 100vh; /* Alterado de height para min-height */
+    position: relative;
+    padding-bottom: 100px; /* Novo */
+}
 
-        .slide {
-            width: 100%;
-            height: 100%;
-            display: none;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 40px;
-            position: absolute;
-            top: 0;
-            left: 0;
-            opacity: 0;
-            transition: opacity 0.5s ease-in-out;
+       .slide {
+    width: 100%;
+    min-height: 100vh; /* Alterado de height */
+    display: none;
+    flex-direction: column;
+    justify-content: flex-start; /* Alterado de center */
+    align-items: center;
+    padding: 80px 40px 120px; /* Alterado */
+    position: absolute;
+    overflow-y: auto; /* Novo */
+
         }
 
         .slide.active {
@@ -79,6 +78,7 @@
             text-align: center;
             backdrop-filter: blur(10px);
             transition: all 0.3s ease;
+            margin: 15px 0;
         }
 
         .metric-card:hover {
@@ -116,16 +116,15 @@
             backdrop-filter: blur(10px);
         }
 
-        .navigation {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 15px;
-            z-index: 1000;
-        }
-
+       .navigation {
+    position: fixed;
+    bottom: 20px; /* Alterado */
+    left: 50%;
+    transform: translateX(-50%) scale(0.9); /* Alterado */
+    display: flex;
+    gap: 10px; /* Alterado */
+    z-index: 1000;
+}
         .nav-btn {
             background: rgba(77, 208, 225, 0.8);
             border: none;
@@ -459,6 +458,47 @@
     font-size: 0.8rem;
     margin-top: 5px;
     opacity: 0.8;
+} /* ===== NOVOS AJUSTES RESPONSIVOS ===== */
+@media (max-width: 1600px) {
+    .slide-title {
+        font-size: 2.5rem !important;
+    }
+    .chart-container {
+        max-width: 90% !important;
+    }
+}
+
+@media (max-height: 700px) {
+    .slide {
+        padding: 60px 20px 100px !important;
+    }
+    .metric-value {
+        font-size: 3rem !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .slide-title {
+        font-size: 1.8rem !important; 
+    /* Adicione estas duas linhas: */
+    word-break: break-word; 
+    max-width: 90%;
+}
+    }
+    .nav-btn {
+        padding: 10px 15px !important;
+        font-size: 0.8rem !important;
+    }
+}
+
+/* Previne sobreposição em zooms altos */
+@media (min-resolution: 150dpi) {
+    .slide-header {
+        margin-top: 10vh !important;
+    }
+    .navigation {
+        bottom: 5vh !important;
+    }
 }
     </style>
 </head>
