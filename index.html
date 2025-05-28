@@ -24,6 +24,9 @@
     min-height: 100vh; /* Alterado de height para min-height */
     position: relative;
     padding-bottom: 100px; /* Novo */
+    overflow-x: hidden !important;
+    min-height: 100vh !important;
+    height: auto !important;
 }
 
        .slide {
@@ -31,7 +34,6 @@
     min-height: 100vh; /* Alterado de height */
     display: none;
     flex-direction: column;
-    justify-content: flex-start; /* Alterado de center */
     align-items: center;
     padding: 80px 40px 120px; /* Alterado */
     position: absolute;
@@ -116,14 +118,14 @@
             backdrop-filter: blur(10px);
         }
 
-       .navigation {
-    position: fixed;
-    bottom: 20px; /* Alterado */
-    left: 50%;
-    transform: translateX(-50%) scale(0.9); /* Alterado */
-    display: flex;
-    gap: 10px; /* Alterado */
-    z-index: 1000;
+     .navigation {
+    bottom: 50px !important; /* Aumenta espaço abaixo */
+    transform: translateX(-50%) scale(0.9) !important;
+    backdrop-filter: blur(5px); /* Efeito de vidro */
+    background: rgba(0, 0, 0, 0.3); /* Fundo semi-transparente */
+    padding: 10px;
+    border-radius: 50px;
+
 }
         .nav-btn {
             background: rgba(77, 208, 225, 0.8);
@@ -498,7 +500,28 @@
     }
     .navigation {
         bottom: 5vh !important;
-    }
+    } /* ===== CORREÇÃO DA CAPA ===== */
+.slide:first-child {
+    justify-content: center !important;
+    padding-top: 15vh !important;
+    padding-bottom: 15vh !important;
+}
+
+.slide:not(:first-child) {
+    justify-content: flex-start;
+    padding: 80px 40px 120px;
+}
+
+/* Efeito de centralização perfeita */
+.vision-section {
+    transform: translateY(-25px);
+    width: 100%;
+    text-align: center;
+}
+
+/* Garante que outros slides não afetem a capa */
+.slide-header:not(.slide-cover .slide-header) {
+    margin-top: 0 !important;
 }
     </style>
 </head>
@@ -509,12 +532,12 @@
         </div>
 
         <!-- Slide 1: Resultados NPS -->
-        <div class="slide active">
-            <div class="vision-section">
-                <h1 class="slide-title">Resultados NPS</h1>
-                <div class="slide-subtitle">Experiência do Cliente - Abril 2025</div>
-            </div>
-        </div>
+        <div class="slide active" style="justify-content: center;">
+    <div class="vision-section" style="margin: auto;">
+        <h1 class="slide-title" style="margin-bottom: 20px;">Resultados NPS</h1>
+        <div class="slide-subtitle">Experiência do Cliente - Abril 2025</div>
+    </div>
+</div>
 
         <!-- Slide 2: Panorama Geral -->
         <div class="slide">
