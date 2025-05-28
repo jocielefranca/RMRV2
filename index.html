@@ -340,12 +340,71 @@
         .action-table tr:hover {
             background: rgba(255, 255, 255, 0.05);
         }
+        .comparison-table-container {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    border: 2px solid rgba(77, 208, 225, 0.3);
+    backdrop-filter: blur(10px);
+    margin: 20px 0;
+    overflow: hidden;
+}
+
+.comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    color: white;
+}
+
+.comparison-table th,
+.comparison-table td {
+    padding: 18px;
+    text-align: center;
+    border-bottom: 1px solid rgba(77, 208, 225, 0.2);
+}
+
+.comparison-table th {
+    background: rgba(77, 208, 225, 0.15);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+.comparison-table tr:last-child td {
+    border-bottom: none;
+}
+
+.comparison-table tr:hover {
+    background: rgba(77, 208, 225, 0.05);
+}
+
+.delta-positive {
+    color: #4caf50;
+    font-weight: bold;
+}
+
+.delta-negative {
+    color: #f44336;
+    font-weight: bold;
+}
+
+.highlight-row {
+    background: rgba(77, 208, 225, 0.1);
+    font-weight: 500;
+}
+
+.metric-subtext {
+    font-size: 0.9rem;
+    color: #4dd0e1;
+    margin-top: 8px;
+    opacity: 0.9;
+}
     </style>
 </head>
 <body>
     <div class="presentation-container">
         <div class="slide-indicator">
-            <span id="currentSlide">1</span> / <span id="totalSlides">5</span>
+            <span id="currentSlide">1</span> / <span id="totalSlides">6</span>
         </div>
 
         <!-- Slide 1: Resultados NPS -->
@@ -431,7 +490,32 @@
             <div class="chart-container">
                 <canvas id="monthlyChart"></canvas>
             </div>
+        </div> 
+<div class="slide">
+    <div class="slide-header">
+        <h2 class="slide-title">Impacto da Pós-Ocupação</h2>
+        <p class="slide-subtitle">Comparativo de Desempenho NPS</p>
+    </div>
+    <div class="content-grid">
+        <!-- Gráfico Comparativo -->
+        <div class="chart-container" style="grid-column: span 2;">
+            <canvas id="occupationChart"></canvas>
         </div>
+        
+        <!-- Cards com Dados Chave -->
+        <div class="metric-card">
+            <div class="metric-value positive">+12</div>
+            <div class="metric-label">Melhoria no Período</div>
+            <div class="metric-subtext">Jan-Mai 2024/2025</div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-value">11</div>
+            <div class="metric-label">Delta Médio Anual</div>
+            <div class="metric-subtext">2024 → 2025</div>
+        </div>
+    </div>
+</div>
+
 
         <!-- Slide 5: Plano de Ação -->
         <div class="slide">
