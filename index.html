@@ -389,67 +389,101 @@
             <div class="chart-container">
                 <canvas id="overviewChart"></canvas>
             </div>
-        </div>  <!-- Slide 5: Resumo Comparativo -->
-        <div class="slide">
-            <div class="slide-header">
-                <h2 class="slide-title">Resumo Comparativo</h2>
-                <p class="slide-subtitle">Impacto da Pós Ocupação no NPS</p>
-            </div>
-            <div class="content-grid">
-                <div class="comparison-section">
-                    <h3 class="comparison-title">Análise Anual Completa</h3>
-                    <div class="comparison-table-container">
-                        <table class="comparison-table">
-                            <thead>
-                                <tr>
-                                    <th>Ano</th>
-                                    <th>Sem Pós Ocupação</th>
-                                    <th>Com Pós Ocupação</th>
-                                    <th>Delta</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><strong>2024</strong></td>
-                                    <td class="nps-value positive">80</td>
-                                    <td class="nps-value">73</td>
-                                    <td class="delta-value">-7</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>2025</strong></td>
-                                    <td class="nps-value positive">76</td>
-                                    <td class="nps-value negative">65</td>
-                                    <td class="delta-value negative">-11</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+   <!-- Slide 5: Resumo Comparativo -->
+    <div class="slide">
+      <div class="slide-header">
+        <h2 class="slide-title">Resumo Comparativo</h2>
+        <p class="slide-subtitle">Impacto da Pós Ocupação no NPS</p>
+      </div>
+      
+      <div class="summary-grid">
+        <div class="summary-card">
+          <div class="summary-header">
+            <h3>Comparativo Anual</h3>
+            <div class="summary-period">Dados completos</div>
+          </div>
+          <div class="summary-metrics">
+            <div class="metric-row">
+              <div class="metric-year">2024</div>
+              <div class="metric-comparison">
+                <div class="metric-bar">
+                  <div class="bar-without" style="width: 100%">
+                    <span class="bar-value">80</span>
+                  </div>
                 </div>
-                <div class="comparison-section">
-                    <h3 class="comparison-title">Mesmo Período (Jan a Mai)</h3>
-                    <div class="comparison-highlight">
-                        <div class="comparison-metric">
-                            <div class="comparison-year">2024 vs 2025</div>
-                            <div class="comparison-values">
-                                <span class="comparison-without">85</span>
-                                <span class="comparison-arrow">→</span>
-                                <span class="comparison-with">73</span>
-                            </div>
-                            <div class="comparison-delta">
-                                <span class="delta-label">Delta:</span>
-                                <span class="delta-value-large">-12</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="insight-box">
-                        <div class="insight-icon">💡</div>
-                        <div class="insight-text">
-                            <strong>Insight Crítico:</strong> O impacto da pós ocupação tem se intensificado, passando de -7 (2024) para -11 (2025), indicando necessidade urgente de melhoria nos processos pós-entrega.
-                        </div>
-                    </div>
+                <div class="metric-bar">
+                  <div class="bar-with" style="width: 91.25%">
+                    <span class="bar-value">73</span>
+                  </div>
                 </div>
+                <div class="delta-badge delta-neutral">-7</div>
+              </div>
             </div>
+            <div class="metric-row">
+              <div class="metric-year">2025</div>
+              <div class="metric-comparison">
+                <div class="metric-bar">
+                  <div class="bar-without" style="width: 95%">
+                    <span class="bar-value">76</span>
+                  </div>
+                </div>
+                <div class="metric-bar">
+                  <div class="bar-with" style="width: 81.25%">
+                    <span class="bar-value">65</span>
+                  </div>
+                </div>
+                <div class="delta-badge delta-negative">-11</div>
+              </div>
+            </div>
+          </div>
         </div>
+        
+        <div class="summary-card">
+          <div class="summary-header">
+            <h3>Mesmo Período</h3>
+            <div class="summary-period">Janeiro a Maio</div>
+          </div>
+          <div class="period-comparison">
+            <div class="period-metric">
+              <div class="period-label">2024</div>
+              <div class="period-value period-high">85</div>
+            </div>
+            <div class="period-arrow">→</div>
+            <div class="period-metric">
+              <div class="period-label">2025</div>
+              <div class="period-value period-medium">73</div>
+            </div>
+            <div class="period-delta">
+              <span class="delta-label">Variação</span>
+              <span class="delta-value-highlight">-12</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="summary-card">
+          <div class="summary-header">
+            <h3>Performance por Categoria</h3>
+            <div class="summary-period">Análise detalhada</div>
+          </div>
+          <div class="category-metrics">
+            <div class="category-item">
+              <span class="category-label">Sem Pós Ocupação</span>
+              <div class="category-trend">
+                <span class="trend-value positive">Estável</span>
+                <div class="trend-indicator positive"></div>
+              </div>
+            </div>
+            <div class="category-item">
+              <span class="category-label">Com Pós Ocupação</span>
+              <div class="category-trend">
+                <span class="trend-value negative">Em declínio</span>
+                <div class="trend-indicator negative"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
         <!-- Slide 3: Jornada do Cliente 2024 vs 2025 -->
         <div class="slide">
