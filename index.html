@@ -340,6 +340,20 @@
         .action-table tr:hover {
             background: rgba(255, 255, 255, 0.05);
         }
+        .comparison-section {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 25px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(77, 208, 225, 0.3);
+}
+
+.comparison-title {
+    font-size: 1.5rem;
+    color: #4dd0e1;
+    margin-bottom: 20px;
+    text-align: center;
+}
     </style>
 </head>
 <body>
@@ -374,6 +388,66 @@
             </div>
             <div class="chart-container">
                 <canvas id="overviewChart"></canvas>
+            </div>
+        </div>  <!-- Slide 5: Resumo Comparativo -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Resumo Comparativo</h2>
+                <p class="slide-subtitle">Impacto da Pós Ocupação no NPS</p>
+            </div>
+            <div class="content-grid">
+                <div class="comparison-section">
+                    <h3 class="comparison-title">Análise Anual Completa</h3>
+                    <div class="comparison-table-container">
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Ano</th>
+                                    <th>Sem Pós Ocupação</th>
+                                    <th>Com Pós Ocupação</th>
+                                    <th>Delta</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>2024</strong></td>
+                                    <td class="nps-value positive">80</td>
+                                    <td class="nps-value">73</td>
+                                    <td class="delta-value">-7</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>2025</strong></td>
+                                    <td class="nps-value positive">76</td>
+                                    <td class="nps-value negative">65</td>
+                                    <td class="delta-value negative">-11</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="comparison-section">
+                    <h3 class="comparison-title">Mesmo Período (Jan a Mai)</h3>
+                    <div class="comparison-highlight">
+                        <div class="comparison-metric">
+                            <div class="comparison-year">2024 vs 2025</div>
+                            <div class="comparison-values">
+                                <span class="comparison-without">85</span>
+                                <span class="comparison-arrow">→</span>
+                                <span class="comparison-with">73</span>
+                            </div>
+                            <div class="comparison-delta">
+                                <span class="delta-label">Delta:</span>
+                                <span class="delta-value-large">-12</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="insight-box">
+                        <div class="insight-icon">💡</div>
+                        <div class="insight-text">
+                            <strong>Insight Crítico:</strong> O impacto da pós ocupação tem se intensificado, passando de -7 (2024) para -11 (2025), indicando necessidade urgente de melhoria nos processos pós-entrega.
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
