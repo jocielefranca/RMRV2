@@ -13,16 +13,18 @@
         }
 
         body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #1a5d5d 0%, #0d4d4d 100%);
-            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f3b3b 0%, #0d2e2e 100%);
+            color: #e0f7fa;
             overflow-x: hidden;
+            line-height: 1.6;
         }
 
         .presentation-container {
             width: 100vw;
             height: 100vh;
             position: relative;
+            overflow: hidden;
         }
 
         .slide {
@@ -52,15 +54,20 @@
 
         .slide-title {
             font-size: 3rem;
-            font-weight: bold;
+            font-weight: 700;
             margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+            color: #4dd0e1;
+            background: linear-gradient(to right, #4dd0e1, #26c6da);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .slide-subtitle {
             font-size: 1.5rem;
-            color: #4dd0e1;
+            color: #80deea;
             font-weight: 300;
+            letter-spacing: 1px;
         }
 
         .content-grid {
@@ -72,48 +79,56 @@
         }
 
         .metric-card {
-            background: rgba(255, 255, 255, 0.1);
-            border: 2px solid rgba(77, 208, 225, 0.3);
+            background: rgba(13, 46, 46, 0.7);
+            border: 2px solid rgba(77, 208, 225, 0.4);
             border-radius: 20px;
             padding: 30px;
             text-align: center;
             backdrop-filter: blur(10px);
             transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
         }
 
         .metric-card:hover {
             transform: translateY(-5px);
             border-color: #4dd0e1;
-            box-shadow: 0 10px 30px rgba(77, 208, 225, 0.2);
+            box-shadow: 0 15px 35px rgba(77, 208, 225, 0.3);
+            background: rgba(15, 59, 59, 0.8);
         }
 
         .metric-value {
             font-size: 4rem;
             font-weight: bold;
             margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
         }
 
         .metric-value.positive {
-            color: #4caf50;
+            color: #81c784;
+            text-shadow: 0 0 10px rgba(129, 199, 132, 0.3);
         }
 
         .metric-value.negative {
-            color: #f44336;
+            color: #e57373;
+            text-shadow: 0 0 10px rgba(229, 115, 115, 0.3);
         }
 
         .metric-label {
             font-size: 1.2rem;
-            color: #4dd0e1;
+            color: #80deea;
+            letter-spacing: 1px;
         }
 
         .chart-container {
             width: 100%;
             max-width: 800px;
             height: 400px;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(13, 46, 46, 0.7);
             border-radius: 15px;
             padding: 20px;
             backdrop-filter: blur(10px);
+            border: 1px solid rgba(77, 208, 225, 0.3);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
         }
 
         .navigation {
@@ -127,35 +142,46 @@
         }
 
         .nav-btn {
-            background: rgba(77, 208, 225, 0.8);
-            border: none;
+            background: rgba(77, 208, 225, 0.2);
+            border: 2px solid #4dd0e1;
             border-radius: 50px;
             padding: 15px 25px;
-            color: white;
+            color: #e0f7fa;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s ease;
+            min-width: 150px;
+            letter-spacing: 1px;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
         .nav-btn:hover {
-            background: #4dd0e1;
+            background: rgba(77, 208, 225, 0.4);
             transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(77, 208, 225, 0.3);
         }
 
         .nav-btn:disabled {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
             cursor: not-allowed;
             transform: none;
+            box-shadow: none;
         }
 
         .slide-indicator {
             position: fixed;
             top: 30px;
             right: 30px;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(15, 59, 59, 0.7);
             padding: 10px 20px;
             border-radius: 25px;
             font-size: 1rem;
+            color: #80deea;
+            border: 1px solid rgba(77, 208, 225, 0.3);
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
         .journey-grid {
@@ -167,29 +193,34 @@
         }
 
         .journey-item {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(13, 46, 46, 0.7);
             border-radius: 15px;
             padding: 20px;
             text-align: center;
             border: 2px solid transparent;
             transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
 
         .journey-item:hover {
             border-color: #4dd0e1;
             transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(77, 208, 225, 0.2);
         }
 
         .journey-title {
             font-size: 0.9rem;
             margin-bottom: 10px;
-            color: #4dd0e1;
+            color: #80deea;
+            font-weight: 600;
         }
 
         .journey-nps {
             font-size: 2rem;
             font-weight: bold;
             margin-bottom: 5px;
+            color: #e0f7fa;
         }
 
         .journey-change {
@@ -197,15 +228,30 @@
             opacity: 0.8;
         }
 
+        .journey-change.positive {
+            color: #81c784;
+        }
+
+        .journey-change.negative {
+            color: #e57373;
+        }
+
         .vision-section {
             text-align: center;
             max-width: 800px;
+            padding: 30px;
+            background: rgba(15, 59, 59, 0.5);
+            border-radius: 20px;
+            border: 1px solid rgba(77, 208, 225, 0.3);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
         }
 
         .vision-text {
             font-size: 1.5rem;
             line-height: 1.6;
             margin-bottom: 30px;
+            color: #e0f7fa;
         }
 
         .highlight-text {
@@ -229,29 +275,32 @@
         }
 
         .status-card {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(13, 46, 46, 0.7);
             border-radius: 15px;
             padding: 20px;
             text-align: center;
             min-width: 120px;
             border: 2px solid transparent;
             transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
         .status-card:hover {
-            transform: translateY(-3px);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
         }
 
         .status-card.done {
-            border-color: #4caf50;
+            border-color: #81c784;
         }
 
         .status-card.doing {
-            border-color: #ff9800;
+            border-color: #ffb74d;
         }
 
         .status-card.todo {
-            border-color: #808080;
+            border-color: #90a4ae;
         }
 
         .status-number {
@@ -261,46 +310,53 @@
         }
 
         .status-card.done .status-number {
-            color: #4caf50;
+            color: #81c784;
+            text-shadow: 0 0 10px rgba(129, 199, 132, 0.3);
         }
 
         .status-card.doing .status-number {
-            color: #ff9800;
+            color: #ffb74d;
+            text-shadow: 0 0 10px rgba(255, 183, 77, 0.3);
         }
 
         .status-card.todo .status-number {
-            color: #808080;
+            color: #90a4ae;
+            text-shadow: 0 0 10px rgba(144, 164, 174, 0.3);
         }
 
         .status-label {
             font-size: 1rem;
-            color: #4dd0e1;
+            color: #80deea;
             font-weight: bold;
+            letter-spacing: 1px;
         }
 
         .action-table-container {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(13, 46, 46, 0.7);
             border-radius: 15px;
             padding: 20px;
             backdrop-filter: blur(10px);
             max-height: 400px;
             overflow-y: auto;
+            border: 1px solid rgba(77, 208, 225, 0.3);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
         }
 
         .action-table {
             width: 100%;
             border-collapse: collapse;
-            color: white;
+            color: #e0f7fa;
         }
 
         .action-table th {
-            background: rgba(77, 208, 225, 0.3);
+            background: rgba(77, 208, 225, 0.2);
             padding: 15px 10px;
             text-align: left;
             font-weight: bold;
             border-bottom: 2px solid #4dd0e1;
             position: sticky;
             top: 0;
+            backdrop-filter: blur(5px);
         }
 
         .action-table td {
@@ -320,32 +376,142 @@
             font-size: 0.8rem;
             font-weight: bold;
             text-transform: uppercase;
+            display: inline-block;
+            min-width: 80px;
+            text-align: center;
         }
 
         .status-badge.done {
-            background: #4caf50;
-            color: white;
+            background: #81c784;
+            color: #1b5e20;
+            box-shadow: 0 2px 5px rgba(129, 199, 132, 0.3);
         }
 
         .status-badge.doing {
-            background: #ff9800;
-            color: white;
+            background: #ffb74d;
+            color: #e65100;
+            box-shadow: 0 2px 5px rgba(255, 183, 77, 0.3);
         }
 
         .status-badge.todo {
-            background: #808080;
-            color: white;
+            background: #90a4ae;
+            color: #37474f;
+            box-shadow: 0 2px 5px rgba(144, 164, 174, 0.3);
         }
 
         .action-table tr:hover {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(77, 208, 225, 0.1);
+        }
+
+        /* Análise Estratégica */
+        .analysis-section {
+            background: rgba(13, 46, 46, 0.7);
+            border-radius: 20px;
+            padding: 25px;
+            border: 1px solid rgba(77, 208, 225, 0.3);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            height: 100%;
+        }
+
+        .analysis-header {
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(77, 208, 225, 0.3);
+        }
+
+        .analysis-title {
+            color: #4dd0e1;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .analysis-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            background: rgba(15, 59, 59, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .analysis-item:hover {
+            background: rgba(77, 208, 225, 0.1);
+            transform: translateX(5px);
+        }
+
+        .analysis-item.urgent {
+            border-left: 4px solid #e57373;
+        }
+
+        .analysis-item.opportunity {
+            border-left: 4px solid #81c784;
+        }
+
+        .analysis-icon {
+            font-size: 1.8rem;
+            color: #4dd0e1;
+            min-width: 40px;
+            text-align: center;
+        }
+
+        .analysis-text {
+            flex: 1;
+        }
+
+        .analysis-text strong {
+            color: #4dd0e1;
+        }
+
+        .analysis-text ul {
+            padding-left: 20px;
+            margin-top: 10px;
+        }
+
+        .analysis-text li {
+            margin-bottom: 8px;
+        }
+
+        /* Decorative elements */
+        .decorative-circle {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(77, 208, 225, 0.2) 0%, rgba(77, 208, 225, 0) 70%);
+            z-index: -1;
+        }
+
+        .circle-1 {
+            width: 300px;
+            height: 300px;
+            top: -100px;
+            right: -100px;
+        }
+
+        .circle-2 {
+            width: 200px;
+            height: 200px;
+            bottom: -50px;
+            left: -50px;
+        }
+
+        .circle-3 {
+            width: 150px;
+            height: 150px;
+            top: 50%;
+            left: 10%;
         }
     </style>
 </head>
 <body>
     <div class="presentation-container">
+        <!-- Decorative background elements -->
+        <div class="decorative-circle circle-1"></div>
+        <div class="decorative-circle circle-2"></div>
+        <div class="decorative-circle circle-3"></div>
+        
         <div class="slide-indicator">
-            <span id="currentSlide">1</span> / <span id="totalSlides">5</span>
+            <span id="currentSlide">1</span> / <span id="totalSlides">6</span>
         </div>
 
         <!-- Slide 1: Resultados NPS -->
@@ -353,6 +519,7 @@
             <div class="vision-section">
                 <h1 class="slide-title">Resultados NPS</h1>
                 <div class="slide-subtitle">Experiência do Cliente - Maio 2025</div>
+                <p class="vision-text">Análise estratégica da jornada do cliente e plano de ação para <span class="highlight-text">elevar a satisfação</span> e <span class="highlight-text">fidelização</span> em todo o Grupo Diagonal</p>
             </div>
         </div>
 
@@ -380,7 +547,7 @@
         <!-- Slide 3: Jornada do Cliente 2024 vs 2025 -->
         <div class="slide">
             <div class="slide-header">
-                <h2 class="slide-title">Jornada do Cliente Victa </h2>
+                <h2 class="slide-title">Jornada do Cliente Victa</h2>
                 <p class="slide-subtitle">Comparativo por Etapa - 2024 vs 2025</p>
             </div>
             <div class="content-grid">
@@ -388,32 +555,32 @@
                     <div class="journey-item">
                         <div class="journey-title">Pós Venda</div>
                         <div class="journey-nps">89 → 88</div>
-                        <div class="journey-change">-1 pontos</div>
+                        <div class="journey-change negative">-1 pontos</div>
                     </div>
                     <div class="journey-item">
                         <div class="journey-title">Pós Assinatura</div>
                         <div class="journey-nps">88 → 76</div>
-                        <div class="journey-change">-12 pontos</div>
+                        <div class="journey-change negative">-12 pontos</div>
                     </div>
                     <div class="journey-item">
                         <div class="journey-title">Pós Visita</div>
                         <div class="journey-nps">79 → 84</div>
-                        <div class="journey-change">+5 pontos</div>
+                        <div class="journey-change positive">+5 pontos</div>
                     </div>
                     <div class="journey-item">
                         <div class="journey-title">Pós Vistoria</div>
                         <div class="journey-nps">81 → 89</div>
-                        <div class="journey-change">+8 pontos</div>
+                        <div class="journey-change positive">+8 pontos</div>
                     </div>
                     <div class="journey-item">
                         <div class="journey-title">Astec</div>
                         <div class="journey-nps">33 → 48</div>
-                        <div class="journey-change">+13 pontos</div>
+                        <div class="journey-change positive">+13 pontos</div>
                     </div>
                     <div class="journey-item">
                         <div class="journey-title">Pós Moradia</div>
                         <div class="journey-nps">-53 → -39</div>
-                        <div class="journey-change">+14 pontos</div>
+                        <div class="journey-change positive">+14 pontos</div>
                     </div>
                 </div>
                 <div class="chart-container">
@@ -495,48 +662,36 @@
                                 <td>05/04/25</td>
                                 <td><span class="status-badge done">Feito</span></td>
                             </tr>
-                             </tr>
                             <tr class="status-done">
-                                <td>[Estatísticas] Revisão de metas mensais para plano de recuperação</td>
-                                <td>Jô</td>
-                                <td>05/04/25</td>
-                                <td><span class="status-badge done">Feito</span></td>
-                            </tr>
-                            <tr class="status-done">
-                                <td>[Alertas] Sistema de alerta preventivo quando recebermos notas detratoras e neutras;</td>
+                                <td>[Alertas] Sistema de alerta preventivo quando recebermos notas detratoras e neutras</td>
                                 <td>Natália</td>
                                 <td>15/05/25</td>
                                 <td><span class="status-badge done">Feito</span></td>
                             </tr>
-                          </tr>
                             <tr class="status-done">
-                                <td>[Mirante] Elaborar ações de reenvio da pesquisa para aumento de taxa de respostas;</td>
+                                <td>[Mirante] Elaborar ações de reenvio da pesquisa para aumento de taxa de respostas</td>
                                 <td>Natália</td>
                                 <td>30/04/25</td>
                                 <td><span class="status-badge done">Feito</span></td>
                             </tr>
-                          </tr>
                             <tr class="status-done">
-                                <td>[Mirante] [Análise comparativa] Elaborar relatório comparativo entre Mirante e Altavista;</td>
+                                <td>[Mirante] [Análise comparativa] Elaborar relatório comparativo entre Mirante e Altavista</td>
                                 <td>Jô</td>
                                 <td>30/04/25</td>
                                 <td><span class="status-badge done">Feito</span></td>
                             </tr>
-                         </tr>
-                            </tr>
                             <tr class="status-done">
-                                <td>[Guardiões] Iniciar os ritos com o time selecionado;</td>
+                                <td>[Guardiões] Iniciar os ritos com o time selecionado</td>
                                 <td>Jô</td>
                                 <td>28/05/25</td>
                                 <td><span class="status-badge done">Feito</span></td>
                             </tr>
-                         </tr>
                             <tr class="status-done">
-                                <td>[Análise comparativa] Analisar ponto a ponto do relatório e indicar se houve solução para as obras futuras;</td>
+                                <td>[Análise comparativa] Analisar ponto a ponto do relatório e indicar se houve solução para as obras futuras</td>
                                 <td>Gabriel</td>
                                 <td>30/04/25</td>
-                                 <td><span class="status-badge done">Feito</span></td>
-                                <td>
+                                <td><span class="status-badge done">Feito</span></td>
+                            </tr>
                             <tr class="status-doing">
                                 <td>[Análises] Comparar processos de assinatura Fev-Abr/2025 vs 2024</td>
                                 <td>Jô</td>
@@ -550,23 +705,24 @@
                                 <td><span class="status-badge doing">Fazendo</span></td>
                             </tr>
                             <tr class="status-doing">
-                                <td>[Alinhamentos]Reuniões semanais de 15 minutos para análise dos resultados;</td>
+                                <td>[Alinhamentos] Reuniões semanais de 15 minutos para análise dos resultados</td>
                                 <td>Jô</td>
                                 <td>30/06/25</td>
                                 <td><span class="status-badge doing">Fazendo</span></td>
                             </tr>
-                                <tr class="status-todo">
+                            <tr class="status-todo">
                                 <td>[Comunicação proativa] Régua com pílulas de conhecimento</td>
                                 <td>Jô</td>
                                 <td>30/07/25</td>
                                 <td><span class="status-badge todo">A fazer</span></td>
                             </tr>
-                                                    </tbody>
+                        </tbody>
                     </table>
                 </div>
             </div>
         </div>
- <!-- Slide 5: Análise Estratégica -->
+
+        <!-- Slide 6: Análise Estratégica -->
         <div class="slide">
             <div class="slide-header">
                 <h2 class="slide-title">Análise Estratégica</h2>
@@ -654,6 +810,7 @@
                 </div>
             </div>
         </div>
+        
         <div class="navigation">
             <button class="nav-btn" onclick="previousSlide()">‹ Anterior</button>
             <button class="nav-btn" onclick="nextSlide()">Próximo ›</button>
@@ -719,15 +876,23 @@
                     plugins: {
                         legend: {
                             labels: {
-                                color: 'white'
+                                color: 'white',
+                                font: {
+                                    size: 14
+                                }
                             }
                         }
                     },
                     scales: {
                         y: {
                             beginAtZero: true,
+                            min: 0,
+                            max: 100,
                             ticks: {
-                                color: 'white'
+                                color: 'white',
+                                font: {
+                                    size: 12
+                                }
                             },
                             grid: {
                                 color: 'rgba(255, 255, 255, 0.1)'
@@ -735,7 +900,11 @@
                         },
                         x: {
                             ticks: {
-                                color: 'white'
+                                color: 'white',
+                                font: {
+                                    size: 14,
+                                    weight: 'bold'
+                                }
                             },
                             grid: {
                                 color: 'rgba(255, 255, 255, 0.1)'
@@ -754,18 +923,18 @@
             new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: ['Pós Venda', 'Pós Assinatura', 'Pós Visita', 'Pós Vistoria', 'Pós Chaves', 'Pós Moradia', 'Astec'],
+                    labels: ['Pós Venda', 'Pós Assinatura', 'Pós Visita', 'Pós Vistoria', 'Astec', 'Pós Moradia'],
                     datasets: [{
                         label: '2024',
-                        data: [89, 88, 79, 81, 81, -53, 33],
-                        backgroundColor: '#4dd0e1',
-                        borderColor: '#26c6da',
+                        data: [89, 88, 79, 81, 33, -53],
+                        backgroundColor: 'rgba(77, 208, 225, 0.7)',
+                        borderColor: '#4dd0e1',
                         borderWidth: 2
                     }, {
                         label: '2025',
-                        data: [88, 76, 84, 89,  ,-39, 48],
-                        backgroundColor: '#ff9800',
-                        borderColor: '#f57c00',
+                        data: [88, 76, 84, 89, 48, -39],
+                        backgroundColor: 'rgba(255, 152, 0, 0.7)',
+                        borderColor: '#ff9800',
                         borderWidth: 2
                     }]
                 },
@@ -775,7 +944,10 @@
                     plugins: {
                         legend: {
                             labels: {
-                                color: 'white'
+                                color: 'white',
+                                font: {
+                                    size: 14
+                                }
                             }
                         }
                     },
@@ -785,7 +957,10 @@
                             min: -60,
                             max: 100,
                             ticks: {
-                                color: 'white'
+                                color: 'white',
+                                font: {
+                                    size: 12
+                                }
                             },
                             grid: {
                                 color: 'rgba(255, 255, 255, 0.1)'
@@ -794,6 +969,10 @@
                         x: {
                             ticks: {
                                 color: 'white',
+                                font: {
+                                    size: 12,
+                                    weight: 'bold'
+                                },
                                 maxRotation: 45,
                                 minRotation: 45
                             },
@@ -817,18 +996,26 @@
                     labels: ['Jan/25', 'Fev/25', 'Mar/25', 'Abr/25', 'Mai/25', 'Jun/25'],
                     datasets: [{
                         label: 'Pós Assinatura',
-                        data: [100, 69, 63, 68, 91,76],
+                        data: [100, 69, 63, 68, 91, 76],
                         borderColor: '#4dd0e1',
                         backgroundColor: 'rgba(77, 208, 225, 0.1)',
                         borderWidth: 3,
-                        fill: true
+                        tension: 0.3,
+                        fill: true,
+                        pointBackgroundColor: '#4dd0e1',
+                        pointRadius: 5,
+                        pointHoverRadius: 8
                     }, {
                         label: 'Astec',
                         data: [27, 84, 29, 22, 80, 45],
                         borderColor: '#ff9800',
                         backgroundColor: 'rgba(255, 152, 0, 0.1)',
                         borderWidth: 3,
-                        fill: true
+                        tension: 0.3,
+                        fill: true,
+                        pointBackgroundColor: '#ff9800',
+                        pointRadius: 5,
+                        pointHoverRadius: 8
                     }]
                 },
                 options: {
@@ -837,15 +1024,23 @@
                     plugins: {
                         legend: {
                             labels: {
-                                color: 'white'
+                                color: 'white',
+                                font: {
+                                    size: 14
+                                }
                             }
                         }
                     },
                     scales: {
                         y: {
                             beginAtZero: true,
+                            min: 0,
+                            max: 110,
                             ticks: {
-                                color: 'white'
+                                color: 'white',
+                                font: {
+                                    size: 12
+                                }
                             },
                             grid: {
                                 color: 'rgba(255, 255, 255, 0.1)'
@@ -853,7 +1048,11 @@
                         },
                         x: {
                             ticks: {
-                                color: 'white'
+                                color: 'white',
+                                font: {
+                                    size: 12,
+                                    weight: 'bold'
+                                }
                             },
                             grid: {
                                 color: 'rgba(255, 255, 255, 0.1)'
@@ -875,4 +1074,3 @@
     </script>
 </body>
 </html>
-
